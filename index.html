@@ -81,6 +81,70 @@
       cursor: pointer;
     }
 
+    
+    /*
+      Launcher customization:
+      - Uses the image you provided as the button icon.
+      - Keeps a fallback background color if the image fails to load.
+      - Adjust sizes via --chat--toggle--size.
+    */
+    .n8n-chat-launcher {
+      background-color: transparent !important; /* keep transparent so image is visible */
+      width: var(--chat--toggle--size) !important;
+      height: var(--chat--toggle--size) !important;
+      border-radius: 50% !important;
+      padding: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-shadow: 0 6px 18px rgba(16, 19, 48, 0.18);
+      transition: transform var(--chat--transition-duration) ease, box-shadow var(--chat--transition-duration) ease;
+      overflow: hidden;
+    }
+
+    /* Use the provided image as the background icon */
+    .n8n-chat-launcher::before {
+      content: "";
+      display: block;
+      width: 70%;
+      height: 70%;
+      background-image: url("https://ps.w.org/simple-chat-button/assets/icon-256x256.png?rev=2593708");
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      filter: none; /* remove any color overlay */
+    }
+
+    /* Hover/active states */
+    .n8n-chat-launcher:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(16, 19, 48, 0.22);
+      background-color: var(--chat--toggle--hover--background) !important; /* in case library relies on BG for focus ring */
+    }
+    .n8n-chat-launcher:active {
+      transform: translateY(0);
+      background-color: var(--chat--toggle--active--background) !important;
+    }
+
+    /* Hide any built-in SVG/icon inside the launcher if present */
+    .n8n-chat-launcher svg,
+    .n8n-chat-launcher img {
+      display: none !important;
+    }
+
+    /* Make sure the launcher remains accessible (if the library inserts text, keep it visible only to screen readers) */
+    .n8n-chat-launcher > .sr-only,
+    .n8n-chat-launcher [aria-hidden="false"][role="button"] {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0,0,0,0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
   </style>
 </head>
 <body>

@@ -10,18 +10,19 @@
 
   <style>
     /* Hide default n8n SVG icon */
-.n8n-chat-launcher svg {
-  display: none !important;
-}
+    .n8n-chat-launcher svg {
+      display: none !important;
+    }
 
-/* Replace with custom image */
-.n8n-chat-launcher {
-  background-image: url('https://github.com/timarmourai-gif/armourai/blob/main/Greece__39710.webp');
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #e11c2a !important; /* fallback / brand colour */
-}
+    /* Replace with custom image (use raw.githubusercontent.com so the image file is served directly) */
+    .n8n-chat-launcher {
+      background-image: url('https://raw.githubusercontent.com/timarmourai-gif/armourai/main/Greece__39710.webp') !important;
+      background-size: 70% !important;
+      background-repeat: no-repeat !important;
+      background-position: center !important;
+      background-color: #e11c2a !important; /* fallback / brand colour */
+    }
+
     /* Chat customization variables (you can change these to style the chat) */
     :root {
       --chat--color--primary: #f01000;
@@ -69,7 +70,8 @@
       --chat--message--user--border: none;
       --chat--message--pre--background: rgba(0, 0, 0, 0.05);
 
-      --chat--toggle--background-image: url("https://ps.w.org/simple-chat-button/assets/icon-256x256.png?rev=2593708")
+      /* Use a direct raw URL for the toggle background image and end the line with a semicolon */
+      --chat--toggle--background-image: url("https://raw.githubusercontent.com/timarmourai-gif/armourai/main/Greece__39710.webp");
       --chat--toggle--background: var(--chat--color--primary);
       --chat--toggle--hover--background: var(--chat--color--primary-shade-50);
       --chat--toggle--active--background: var(--chat--color--primary--shade-100);
@@ -94,10 +96,6 @@
       font-size: 16px;
       cursor: pointer;
     }
-
-
-    
-  
   </style>
 </head>
 <body>

@@ -286,46 +286,129 @@
       .split{grid-template-columns:1fr}
       .footer-grid{grid-template-columns:1fr}
     }
-   
- #chat-widget-container
-    {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 350px;
-    height: 500px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,.1);
-    display: none;
-    flex-direction: column;
-    z-index: 1000;
-    overflow: hidden;
-  }
 
-  #chat-widget-header {
-    background: #854fff;
-    color: white;
-    padding: 20px;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+     /* Chat styling */
+ #chat-widget-container{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 360px;
+  height: 520px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.18);
+  display: none;
+  flex-direction: column;
+  z-index: 1000;
+  overflow: hidden;
+}
 
-  #chat-widget-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #854fff;
-    color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    z-index: 1001;
-  }
+/* Header */
+#chat-widget-header{
+  background: #e11c2a;              /* ✅ red */
+  color: #fff;
+  padding: 14px 16px;
+  font-weight: 800;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#chat-widget-header button{
+  appearance: none;
+  border: none;
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+#chat-widget-header button:hover{
+  background: rgba(255,255,255,.22);
+}
+
+/* Body */
+#chat-widget-body{
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+  background: #fff;
+}
+
+#chat-widget-body p{
+  margin: 0 0 10px 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  max-width: 90%;
+  word-wrap: break-word;
+}
+
+/* Footer */
+#chat-widget-footer{
+  padding: 12px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  gap: 10px;
+  background: #fff;
+}
+
+#chat-widget-input{
+  flex: 1;
+  padding: 12px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  outline: none;
+  font-size: 14px;
+}
+#chat-widget-input:focus{
+  border-color: rgba(225,28,42,.6);
+  box-shadow: 0 0 0 4px rgba(225,28,42,.15);
+}
+
+/* ✅ Better send button */
+#chat-widget-send{
+  appearance: none;
+  border: none;
+  background: #e11c2a;              /* ✅ red */
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 800;
+}
+#chat-widget-send:hover{
+  background: #b71c1c;
+}
+#chat-widget-send:active{
+  transform: translateY(1px);
+}
+
+/* Launcher bubble */
+#chat-widget-button{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #e11c2a;              /* ✅ red */
+  color: white;
+  border: none;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 22px;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 24px rgba(0,0,0,.25);
+}
+#chat-widget-button:hover{
+  background:#b71c1c;
+}
   </style>
 
   <!-- OPTIONAL: n8n chat styles (if you’re embedding chat) -->

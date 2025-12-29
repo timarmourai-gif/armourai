@@ -121,7 +121,7 @@
     <script>
         window.ChatWidgetConfig = {
             webhook: {
-                url: 'YOUR-URL-HERE',
+                url: 'https://timarmour8.app.n8n.cloud/webhook/9e365eba-633c-4643-9255-dd7d039ab2d9/chat',
                 route: 'general'
             },
             style: {

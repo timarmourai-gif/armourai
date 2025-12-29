@@ -9,20 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 
   <style>
-    /* Hide default n8n SVG icon */
-    .n8n-chat-launcher svg {
-      display: none !important;
-    }
-
-    /* Replace with custom image (use raw.githubusercontent.com so the image file is served directly) */
-    .n8n-chat-launcher {
-      background-image: url('https://raw.githubusercontent.com/timarmourai-gif/armourai/main/Greece__39710.webp') !important;
-      background-size: 70% !important;
-      background-repeat: no-repeat !important;
-      background-position: center !important;
-      background-color: #e11c2a !important; /* fallback / brand colour */
-    }
-
+  
     /* Chat customization variables (you can change these to style the chat) */
     :root {
       --chat--color--primary: #f01000;
@@ -72,10 +59,10 @@
 
       /* Use a direct raw URL for the toggle background image and end the line with a semicolon */
       --chat--toggle--background-image: url("https://raw.githubusercontent.com/timarmourai-gif/armourai/main/Greece__39710.webp");
-      --chat--toggle--background: var(--chat--color--primary);
-      --chat--toggle--hover--background: var(--chat--color--primary-shade-50);
-      --chat--toggle--active--background: var(--chat--color--primary--shade-100);
-      --chat--toggle--color: var(--chat--color-white);
+      --chat--toggle--background: url("https://raw.githubusercontent.com/timarmourai-gif/armourai/main/Greece__39710.webp");
+      --chat--toggle--hover--background: url("https://raw.githubusercontent.com/timarmourai-gif/armourai/main/Greece__39710.webp");
+      --chat--toggle--active--background: url("https://raw.githubusercontent.com/timarmourai-gif/armourai/main/Greece__39710.webp");
+      --chat--toggle--color: url("https://raw.githubusercontent.com/timarmourai-gif/armourai/main/Greece__39710.webp");
       --chat--toggle--size: 64px;
     }
 

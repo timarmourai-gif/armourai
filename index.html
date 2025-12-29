@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My First Website</title>
+  <title>My Real Website</title>
+
+  <!-- n8n chat stylesheet (moved to head so it loads before our overrides) -->
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -20,61 +24,66 @@
       padding: 10px 16px;
       font-size: 16px;
       cursor: pointer;
-	}
-	.n8n-chat-launcher {
-      background-color: #e11c2a !important; /* change this colour */
     }
 
+    /* Override launcher colour */
+    .n8n-chat-launcher {
+      background-color: #e11c2a !important;
+    }
     .n8n-chat-launcher:hover {
       background-color: #b71c1c !important;
     }
-  </style>
-    
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🚀 My Real Website</h1>
     <p>This site is live on GitHub Pages.</p>
-    <button onclick="alert('It works!')">Test Button</button>
-
+    <button id="test-btn">Test Button</button>
   </div>
-    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-<script type="module">
-	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
-createChat({
-	webhookUrl: 'https://timarmour8.app.n8n.cloud/webhook/9e365eba-633c-4643-9255-dd7d039ab2d9/chat',
-	webhookConfig: {
-		method: 'POST',
-		headers: {}
-	},
-	target: '#n8n-chat',
-	mode: 'window',
-	chatInputKey: 'chatInput',
-	chatSessionKey: 'sessionId',
-	loadPreviousSession: true,
-	metadata: {},
-	showWelcomeScreen: false,
-	defaultLanguage: 'en',
-	initialMessages: [
-		'Hi there! 👋',
-		'My name is Nathan. How can I assist you today?'
-	],
-	i18n: {
-		en: {
-			title: 'Hello! 👋',
-			subtitle: "Start a chat. We're here to help you 24/7.",
-			footer: '',
-			getStarted: 'New Conversation',
-			inputPlaceholder: 'Type your question..',
-		},
-	},
-	enableStreaming: false,
-});
-		
-</script>
-    
-  </div>
+  <!-- Chat target element (was missing) -->
+  <div id="n8n-chat"></div>
+
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    // WARNING: Exposing webhookUrl publicly allows anyone to call it.
+    // Consider moving the webhook URL to a server-side endpoint or using a proxy.
+    createChat({
+      webhookUrl: 'https://timarmour8.app.n8n.cloud/webhook/9e365eba-633c-4643-9255-dd7d039ab2d9/chat',
+      webhookConfig: {
+        method: 'POST',
+        headers: {}
+      },
+      target: '#n8n-chat',
+      mode: 'window',
+      chatInputKey: 'chatInput',
+      chatSessionKey: 'sessionId',
+      loadPreviousSession: true,
+      metadata: {},
+      showWelcomeScreen: false,
+      defaultLanguage: 'en',
+      initialMessages: [
+        'Hi there! 👋',
+        'My name is Nathan. How can I assist you today?'
+      ],
+      i18n: {
+        en: {
+          title: 'Hello! 👋',
+          subtitle: "Start a chat. We're here to help you 24/7.",
+          footer: '',
+          getStarted: 'New Conversation',
+          inputPlaceholder: 'Type your question..',
+        },
+      },
+      enableStreaming: false,
+    });
+
+    // Use an event listener rather than inline onclick
+    document.getElementById('test-btn').addEventListener('click', function () {
+      alert('It works!');
+    });
+  </script>
 </body>
 </html>

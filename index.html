@@ -493,7 +493,89 @@
   </footer>
 
 
+<!-- Chat Widget Button -->
+<button id="chat-widget-button">💬</button>
 
+<!-- Chat Widget -->
+<div id="chat-widget-container">
+  <div id="chat-widget-header">
+    <span>Chat</span>
+    <button onclick="closeChatWidget()">✖</button>
+  </div>
+
+  <div id="chat-widget-body">
+    <p><strong>Hi 👋, how can we help?</strong></p>
+  </div>
+
+  <div id="chat-widget-footer">
+    <input
+      type="text"
+      id="chat-widget-input"
+      placeholder="Type your message here..."
+    />
+    <button id="chat-widget-send">Send</button>
+  </div>
+</div>
+<script>
+  window.ChatWidgetConfig = {
+    webhook: {
+      url: 'https://timarmour8.app.n8n.cloud/webhook/9e365eba-633c-4643-9255-dd7d039ab2d9/chat',
+      route: 'general'
+    }
+  };
+
+  function getChatId() {
+    let chatId = sessionStorage.getItem("chatId");
+    if (!chatId) {
+      chatId = "chat_" + Math.random().toString(36).substr(2, 9);
+      sessionStorage.setItem("chatId", chatId);
+    }
+    return chatId;
+  }
+
+  document.getElementById("chat-widget-button").onclick = () => {
+    document.getElementById("chat-widget-container").style.display = "flex";
+    document.getElementById("chat-widget-button").style.display = "none";
+  };
+
+  function closeChatWidget() {
+    document.getElementById("chat-widget-container").style.display = "none";
+    document.getElementById("chat-widget-button").style.display = "flex";
+  }
+
+  document.getElementById("chat-widget-send").onclick = () => {
+    const input = document.getElementById("chat-widget-input");
+    const message = input.value.trim();
+    if (!message) return;
+
+    const chatBody = document.getElementById("chat-widget-body");
+    chatBody.insertAdjacentHTML(
+      "beforeend",
+      `<p style="background:#f1f1f1;padding:12px;border-radius:8px;">${message}</p>`
+    );
+
+    fetch(window.ChatWidgetConfig.webhook.url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chatId: getChatId(),
+        message,
+        route: "general"
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      chatBody.insertAdjacentHTML(
+        "beforeend",
+        `<p style="background:#854fff;color:#fff;padding:12px;border-radius:8px;margin-top:10px;">
+          ${data.output || "Sorry, I couldn't understand that."}
+        </p>`
+      );
+    });
+
+    input.value = "";
+  };
+</script>
   -->
 </body>
 </html>

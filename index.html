@@ -1,41 +1,500 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-AU">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My First Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health Insurance | Simple, clear cover</title>
+  <meta name="description" content="Explore health cover options, get a quick quote, and manage your policy online." />
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background: #f7f7f7;
+    :root{
+      --primary:#e11c2a;          /* Brand colour */
+      --primaryDark:#b71c1c;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --bg:#f7f7f7;
+      --card:#ffffff;
+      --border:#e5e7eb;
+      --radius:14px;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --max:1100px;
     }
-    .container {
-      max-width: 700px;
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.5;
     }
-    button {
-      padding: 10px 16px;
-      font-size: 16px;
-      cursor: pointer;
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+    .topbar{
+      background:#111827;
+      color:#fff;
+      font-size:14px;
+    }
+    .topbar .wrap{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:10px 20px;
+      gap:12px;
+    }
+    .topbar a{opacity:.95}
+    .topbar a:hover{opacity:1; text-decoration:underline}
+
+    header{
+      background:#fff;
+      border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:800; letter-spacing:.2px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:10px;
+      background:var(--primary);
+      display:inline-block;
+      box-shadow: 0 10px 18px rgba(225,28,42,.25);
+    }
+    nav ul{
+      list-style:none;
+      margin:0; padding:0;
+      display:flex;
+      gap:18px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    nav a{
+      font-weight:600;
+      color:#111827;
+      padding:8px 10px;
+      border-radius:10px;
+    }
+    nav a:hover{background:#f3f4f6}
+    .nav-actions{
+      display:flex; align-items:center; gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .btn{
+      border:1px solid var(--border);
+      background:#fff;
+      color:#111827;
+      padding:10px 14px;
+      border-radius:12px;
+      font-weight:700;
+      cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
+      transition: transform .05s ease, background .15s ease, border-color .15s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{background:#f9fafb; border-color:#d1d5db}
+    .btn:active{transform:translateY(1px)}
+    .btn-primary{
+      background:var(--primary);
+      border-color:var(--primary);
+      color:#fff;
+    }
+    .btn-primary:hover{background:var(--primaryDark); border-color:var(--primaryDark)}
+    .btn-ghost{
+      background:transparent;
+    }
+
+    .hero{
+      background: linear-gradient(180deg, #fff 0%, #fff 55%, var(--bg) 55%, var(--bg) 100%);
+      padding:34px 0 10px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .hero-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow: var(--shadow);
+      padding:26px;
+    }
+    .kicker{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      font-weight:700;
+      color:var(--primary);
+      background: rgba(225,28,42,.08);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:13px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size:42px;
+      line-height:1.1;
+      letter-spacing:-.02em;
+    }
+    .lead{
+      font-size:18px;
+      color:var(--muted);
+      margin:0 0 16px;
+      max-width:56ch;
+    }
+    .hero-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .trust-row{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      margin-top:18px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    .trust-pill{
+      display:flex; gap:8px; align-items:center;
+      background:#f9fafb;
+      border:1px solid var(--border);
+      padding:10px 12px;
+      border-radius:12px;
+    }
+
+    .quote-card h2{margin:0 0 8px; font-size:20px}
+    .quote-card p{margin:0 0 14px; color:var(--muted)}
+    .form{
+      display:grid;
+      gap:10px;
+    }
+    .field{
+      display:grid;
+      gap:6px;
+      font-size:14px;
+    }
+    input, select{
+      width:100%;
+      padding:12px 12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      font-size:15px;
+    }
+    input:focus, select:focus{
+      outline:3px solid rgba(225,28,42,.18);
+      border-color: rgba(225,28,42,.45);
+    }
+    .small{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:8px;
+    }
+
+    .section{
+      padding:26px 0;
+    }
+    .section h2{
+      margin:0 0 12px;
+      font-size:26px;
+      letter-spacing:-.01em;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      box-shadow: 0 12px 24px rgba(0,0,0,.06);
+    }
+    .card h3{margin:10px 0 6px; font-size:18px}
+    .card p{margin:0; color:var(--muted)}
+    .icon{
+      width:42px; height:42px; border-radius:14px;
+      background: rgba(17,24,39,.06);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:900;
+      color:#111827;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    .list{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:var(--muted);
+    }
+    .cta{
+      background: linear-gradient(135deg, rgba(225,28,42,.10), rgba(17,24,39,.06));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    footer{
+      background:#111827;
+      color:#e5e7eb;
+      margin-top:18px;
+      padding:26px 0;
+    }
+    footer a{color:#fff; text-decoration:underline}
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:start;
+    }
+    .fineprint{
+      font-size:12px;
+      opacity:.85;
+      margin-top:10px;
+      line-height:1.5;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero-grid{grid-template-columns:1fr}
+      h1{font-size:36px}
+      .grid3{grid-template-columns:1fr}
+      .split{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
     }
   </style>
+
+  <!-- OPTIONAL: n8n chat styles (if you’re embedding chat) -->
+  <!-- <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" /> -->
 </head>
+
 <body>
-  <div class="container">
-    <h1>🚀 My Real Website</h1>
-    <p>This site is live on GitHub Pages.</p>
-    <button onclick="alert('It works!')">Test Button</button>
+  <div class="topbar">
+    <div class="wrap">
+      <div>Help & Support: <a href="#">Contact us</a> · <a href="#">Claims</a> · <a href="#">Find a provider</a></div>
+      <div><a href="#">Log in</a></div>
+    </div>
   </div>
-    <script type="module" defer>
-    import n8nChatUiWidget from 'https://proxy.n8nchatui.com/api/embed/BAZsDX';
-    n8nChatUiWidget.load();
-</script>
+
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <a class="brand" href="#">
+          <span class="logo" aria-hidden="true"></span>
+          <span>HealthCover</span>
+        </a>
+
+        <nav aria-label="Primary">
+          <ul>
+            <li><a href="#covers">Covers</a></li>
+            <li><a href="#extras">Extras</a></li>
+            <li><a href="#members">For members</a></li>
+            <li><a href="#support">Support</a></li>
+          </ul>
+        </nav>
+
+        <div class="nav-actions">
+          <a class="btn btn-ghost" href="#support">Need help?</a>
+          <a class="btn btn-primary" href="#quote">Get a quote</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="quote">
+      <div class="wrap">
+        <div class="hero-grid">
+          <div class="hero-card">
+            <span class="kicker">Private health cover · Simple and clear</span>
+            <h1>Health insurance that fits your life.</h1>
+            <p class="lead">
+              Compare hospital and extras options, estimate your costs, and manage your policy online.
+              Clear info, quick quote, and support when you need it.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#quote-form">Start a quote</a>
+              <a class="btn" href="#covers">Explore covers</a>
+            </div>
+
+            <div class="trust-row" aria-label="Key benefits">
+              <div class="trust-pill">✅ Straightforward options</div>
+              <div class="trust-pill">⏱️ Quick online quote</div>
+              <div class="trust-pill">💬 Digital support</div>
+            </div>
+          </div>
+
+          <div class="hero-card quote-card" id="quote-form">
+            <h2>Get a quick quote</h2>
+            <p>Choose a cover type to get started.</p>
+
+            <form class="form" onsubmit="event.preventDefault(); alert('Quote flow placeholder — wire this to your quote page or n8n.');">
+              <label class="field">
+                Cover type
+                <select required>
+                  <option value="" selected disabled>Select…</option>
+                  <option>Hospital</option>
+                  <option>Extras</option>
+                  <option>Hospital + Extras</option>
+                </select>
+              </label>
+
+              <label class="field">
+                State / Territory
+                <select required>
+                  <option value="" selected disabled>Select…</option>
+                  <option>ACT</option><option>NSW</option><option>NT</option><option>QLD</option>
+                  <option>SA</option><option>TAS</option><option>VIC</option><option>WA</option>
+                </select>
+              </label>
+
+              <label class="field">
+                Postcode
+                <input inputmode="numeric" pattern="[0-9]{4}" placeholder="e.g. 3000" required />
+              </label>
+
+              <button class="btn btn-primary" type="submit">See my options</button>
+              <div class="small">By continuing, you agree to our terms and privacy policy (placeholder).</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="covers">
+      <div class="wrap">
+        <h2>Explore cover options</h2>
+        <div class="grid3">
+          <div class="card">
+            <div class="icon">🏥</div>
+            <h3>Hospital cover</h3>
+            <p>Support for in-hospital treatment with different levels to match your needs.</p>
+          </div>
+          <div class="card" id="extras">
+            <div class="icon">🦷</div>
+            <h3>Extras cover</h3>
+            <p>Help with common services like dental, optical, physio and more.</p>
+          </div>
+          <div class="card">
+            <div class="icon">👨‍👩‍👧‍👦</div>
+            <h3>Family options</h3>
+            <p>Flexible covers designed for couples, families and growing households.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="members">
+      <div class="wrap">
+        <div class="split">
+          <div class="card">
+            <h2>Already a member?</h2>
+            <p class="lead" style="margin-top:6px;">
+              Manage your policy, view claims, and update details online — anytime.
+            </p>
+            <ul class="list">
+              <li>Make a claim (placeholder)</li>
+              <li>Update contact details</li>
+              <li>View cover and documents</li>
+              <li>Find a provider</li>
+            </ul>
+            <div class="hero-actions" style="margin-top:14px;">
+              <a class="btn btn-primary" href="#">Log in</a>
+              <a class="btn" href="#support">Get support</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2>Need help choosing?</h2>
+            <p class="lead" style="margin-top:6px;">
+              Answer a few quick questions and we’ll point you to suitable options.
+            </p>
+
+            <div class="cta">
+              <div>
+                <strong>Chat with us</strong><br />
+                <span style="color:var(--muted)">Ask about cover, waiting periods, and next steps.</span>
+              </div>
+              <a class="btn btn-primary" href="#support">Start</a>
+            </div>
+
+            <div class="fineprint">
+              This is a demo template. Replace content with your organisation’s approved wording and compliance requirements.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="support">
+      <div class="wrap">
+        <div class="card">
+          <h2>Support</h2>
+          <p class="lead" style="margin-top:6px;">
+            Popular links: <a href="#" style="text-decoration:underline;">Contact us</a> ·
+            <a href="#" style="text-decoration:underline;">Claims</a> ·
+            <a href="#" style="text-decoration:underline;">Find a provider</a> ·
+            <a href="#" style="text-decoration:underline;">FAQs</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="color:#fff;">
+            <span class="logo" aria-hidden="true"></span>
+            <span>HealthCover</span>
+          </div>
+          <div class="fineprint">
+            General information only. This demo does not take into account your personal objectives, financial situation or needs.
+            Consider product disclosure and terms before making decisions. Replace with your own legal and compliance content.
+          </div>
+        </div>
+        <div>
+          <strong>Quick links</strong>
+          <div class="fineprint" style="margin-top:8px;">
+            <a href="#">Privacy</a><br />
+            <a href="#">Terms</a><br />
+            <a href="#">Accessibility</a><br />
+            <a href="#">Complaints</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- OPTIONAL: n8n chat embed (uncomment and add your webhook)
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+    createChat({ webhookUrl: 'YOUR_PRODUCTION_WEBHOOK_URL' });
+  </script>
+  -->
 </body>
-  <script type="module" defer>
-    import n8nChatUiWidget from 'https://proxy.n8nchatui.com/api/embed/BAZsDX';
-    n8nChatUiWidget.load();
-</script>
 </html>

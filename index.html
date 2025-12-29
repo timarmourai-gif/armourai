@@ -286,6 +286,44 @@
       .split{grid-template-columns:1fr}
       .footer-grid{grid-template-columns:1fr}
     }
+    #chat-widget-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.1);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    overflow: hidden;
+  }
+
+  #chat-widget-header {
+    background: #854fff;
+    color: white;
+    padding: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #chat-widget-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #854fff;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+  }
   </style>
 
   <!-- OPTIONAL: n8n chat styles (if you’re embedding chat) -->

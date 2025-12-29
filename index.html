@@ -9,6 +9,19 @@
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 
   <style>
+    /* Hide default n8n SVG icon */
+.n8n-chat-launcher svg {
+  display: none !important;
+}
+
+/* Replace with custom image */
+.n8n-chat-launcher {
+  background-image: url('https://cdn-icons-png.flaticon.com/512/5668/5668649.png');
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #e11c2a !important; /* fallback / brand colour */
+}
     /* Chat customization variables (you can change these to style the chat) */
     :root {
       --chat--color--primary: #f01000;
@@ -80,19 +93,7 @@
       font-size: 16px;
       cursor: pointer;
     }
-/* Hide default n8n SVG icon */
-.n8n-chat-launcher svg {
-  display: none !important;
-}
 
-/* Replace with custom image */
-.n8n-chat-launcher {
-  background-image: url('https://cdn-icons-png.flaticon.com/512/5668/5668649.png');
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #e11c2a !important; /* fallback / brand colour */
-}
 
     
   

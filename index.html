@@ -5,101 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Real Website</title>
 
-  <!-- n8n chat stylesheet (moved to head so it loads before our overrides) -->
-  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
-
+  
   <style>
-    /* Use the raw URL (must be raw.githubusercontent.com) */
-    :root {
-      --custom-chat-icon: url("https://raw.githubusercontent.com/timarmourai-gif/armourai/main/Greece__39710.webp");
-
-      /* Chat customization variables (you can change these to style the chat) */
-      --chat--color--primary: #f01000;
-      --chat--color--primary-shade-50: #ed574a;
-      --chat--color--primary--shade-100: #cf3c5c;
-      --chat--color--secondary: #20b69e;
-      --chat--color-secondary-shade-50: #1ca08a;
-      --chat--color-white: #ffffff;
-      --chat--color-light: #f2f4f8;
-      --chat--color-light-shade-50: #e6e9f1;
-      --chat--color-light-shade-100: #c2c5cc;
-      --chat--color-medium: #d2d4d9;
-      --chat--color-dark: #1a631e;
-      --chat--color-disabled: #777980;
-      --chat--color-typing: #404040;
-
-      --chat--spacing: 1rem;
-      --chat--border-radius: 0.25rem;
-      --chat--transition-duration: 0.15s;
-
-      --chat--window--width: 400px;
-      --chat--window--height: 1100px;
-
-      --chat--header-height: auto;
-      --chat--header--padding: var(--chat--spacing);
-      --chat--header--background: var(--chat--color-dark);
-      --chat--header--color: var(--chat--color-light);
-      --chat--header--border-top: none;
-      --chat--header--border-bottom: none;
-      --chat--heading--font-size: 2em;
-      --chat--subtitle--font-size: inherit;
-      --chat--subtitle--line-height: 1.8;
-
-      --chat--textarea--height: 50px;
-
-      --chat--message--font-size: 1rem;
-      --chat--message--padding: var(--chat--spacing);
-      --chat--message--border-radius: var(--chat--border-radius);
-      --chat--message-line-height: 1.8;
-      --chat--message--bot--background: var(--chat--color-white);
-      --chat--message--bot--color: var(--chat--color-dark);
-      --chat--message--bot--border: none;
-      --chat--message--user--background: var(--chat--color--secondary);
-      --chat--message--user--color: var(--chat--color-white);
-      --chat--message--user--border: none;
-      --chat--message--pre--background: rgba(0, 0, 0, 0.05);
-
-      /* correct variable for the toggle image (semicolon present) */
-      --chat--toggle--background--image: url("https://raw.githubusercontent.com/timarmourai-gif/armourai/main/Greece__39710.webp");
-      --chat--toggle--background: transparent;
-      --chat--toggle--hover--background: var(--chat--color--primary-shade-50);
-      --chat--toggle--active--background: var(--chat--color--primary--shade-100);
-      --chat--toggle--color: var(--chat--color-white);
-      --chat--toggle--size: 64px;
-    }
-
-    /* Page styles */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background: #f7f7f7;
-    }
-    .container {
-      max-width: 700px;
-      background: white;
-      padding: 30px;
-      border-radius: 8px;
-    }
-    button {
-      padding: 10px 16px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    /* Try to override the launcher (use !important so it wins against library styles) */
-    .n8n-chat-launcher {
-      background-image: var(--custom-chat-icon) !important;
-      background-size: 70% !important;
-      background-repeat: no-repeat !important;
-      background-position: center !important;
-      background-color: #e11c2a !important; /* fallback /
-      color */
-    }
-
-    /* hide the default svg if present */
-    .n8n-chat-launcher svg {
-      display: none !important;
-    }
+   
   </style>
 </head>
 <body>
@@ -111,41 +19,25 @@
 
   <!-- Chat target element (required by createChat) -->
   <div id="n8n-chat"></div>
-
-  <script type="module">
-    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
-
-    // WARNING: Exposing webhookUrl publicly allows anyone to call it.
-    // Consider moving the webhook URL to a server-side endpoint or using a proxy.
-    createChat({
-      webhookUrl: 'https://timarmour8.app.n8n.cloud/webhook/9e365eba-633c-4643-9255-dd7d039ab2d9/chat',
-      webhookConfig: {
-        method: 'POST',
-        headers: {}
-      },
-      target: '#n8n-chat',
-      mode: 'window',
-      chatInputKey: 'chatInput',
-      chatSessionKey: 'sessionId',
-      loadPreviousSession: true,
-      metadata: {},
-      showWelcomeScreen: false,
-      defaultLanguage: 'en',
-      initialMessages: [
-        'Hi there! 👋',
-        'My name is Nathan. How can I assist you today?'
-      ],
-      i18n: {
-        en: {
-          title: 'Hello9! 👋',
-          subtitle: "Start a chat. We're here to help you 24/7.",
-          footer: '',
-          getStarted: 'New Conversation',
-          inputPlaceholder: 'Type your question..',
-        },
-      },
-      enableStreaming: false,
+  
+<link rel="stylesheet" href="/chatwidget/chatwidget.css">
+<script src="/chatwidget/chatwidget.js" defer></script>
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const widget = new ChatWidget({
+      endpoint: 'https://timarmour8.app.n8n.cloud/webhook/9e365eba-633c-4643-9255-dd7d039ab2d9/chat', // <-- point this to your n8n Webhook node
+      chatIconUrl: '/assets/chat-icon.png',                  // floating button image
+      logoUrl: '/assets/company-logo.png',                   // header logo inside the panel
+      title: 'Acme Support',
+      theme: {
+        primary: '#6f42c1',
+        accent: '#7b61ff'
+      }
     });
+    widget.mount(); // automatically injects into the page
+  });
+</script>
+ 
 
     // Use an event listener rather than inline onclick
     document.getElementById('test-btn').addEventListener('click', function () {

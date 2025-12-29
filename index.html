@@ -3,132 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Real Website</title>
-
-  
+  <title>My First Website</title>
   <style>
-   
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f7f7f7;
+    }
+    .container {
+      max-width: 700px;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🚀 My Real Website</h1>
     <p>This site is live on GitHub Pages.</p>
-    <button id="test-btn">Test Button</button>
+    <button onclick="alert('It works!')">Test Button</button>
   </div>
-
-  <!-- Chat target element (required by createChat) -->
-  <div id="n8n-chat"></div>
-  
-<link rel="stylesheet" href="/chatwidget/chatwidget.css">
-<script src="/chatwidget/chatwidget.js" defer></script>
-<script>
-  window.addEventListener('DOMContentLoaded', () => {
-    const widget = new ChatWidget({
-      endpoint: 'https://timarmour8.app.n8n.cloud/webhook/9e365eba-633c-4643-9255-dd7d039ab2d9/chat', // <-- point this to your n8n Webhook node
-      chatIconUrl: 'https://github.com/timarmourai-gif/armourai/blob/main/Greece__39710.webp?raw=true',                  // floating button image
-      logoUrl: 'https://github.com/timarmourai-gif/armourai/blob/main/Greece__39710.webp?raw=true',                   // header logo inside the panel
-      title: 'Acme Support',
-      theme: {
-        primary: '#6f42c1',
-        accent: '#7b61ff'
-      }
-    });
-    widget.mount(); // automatically injects into the page
-  });
-</script>
- 
-
-    // Use an event listener rather than inline onclick
-    document.getElementById('test-btn').addEventListener('click', function () {
-      alert('It works!');
-    });
-
-    // --- Runtime injection to ensure the icon is applied even if the chat library re-renders ---
-    (function () {
-      const RAW_ICON = 'https://raw.githubusercontent.com/timarmourai-gif/armourai/main/Greece__39710.webp';
-
-      // Apply styles directly to the launcher element
-      function applyToLauncher(launcher) {
-        if (!launcher) return false;
-
-        try {
-          // hide default svg if present
-          const svg = launcher.querySelector && launcher.querySelector('svg');
-          if (svg) svg.style.display = 'none';
-
-          // set inline background with important priority
-          launcher.style.setProperty('background-image', `url("${RAW_ICON}")`, 'important');
-          launcher.style.setProperty('background-size', '70%', 'important');
-          launcher.style.setProperty('background-repeat', 'no-repeat', 'important');
-          launcher.style.setProperty('background-position', 'center', 'important');
-          launcher.style.setProperty('background-color', '#e11c2a', 'important');
-
-          // also set the CSS variable on :root (covers components using the variable)
-          document.documentElement.style.setProperty('--chat--toggle--background-image', `url("${RAW_ICON}")`);
-
-          // If element exposes a shadowRoot, try to find a button/toggle inside and apply
-          if (launcher.shadowRoot) {
-            try {
-              const inside = launcher.shadowRoot.querySelector && (launcher.shadowRoot.querySelector('button') || launcher.shadowRoot.querySelector('.n8n-chat-toggle'));
-              if (inside) {
-                inside.style.setProperty('background-image', `url("${RAW_ICON}")`, 'important');
-                inside.style.setProperty('background-size', '70%', 'important');
-                inside.style.setProperty('background-repeat', 'no-repeat', 'important');
-                inside.style.setProperty('background-position', 'center', 'important');
-              }
-            } catch (e) {
-              // ignore shadow root failures
-            }
-          }
-          return true;
-        } catch (e) {
-          return false;
-        }
-      }
-
-      // Try to find and apply immediately, otherwise poll until present
-      function tryApply() {
-        const launcher = document.querySelector('.n8n-chat-launcher');
-        return applyToLauncher(launcher);
-      }
-
-      // Poll for the launcher (in case the chat component initializes after page load)
-      const pollInterval = 300;
-      const timeout = 15000; // stop after 15s
-      let elapsed = 0;
-      const intervalId = setInterval(() => {
-        if (tryApply()) {
-          clearInterval(intervalId);
-          if (observer) observer.disconnect();
-        }
-        elapsed += pollInterval;
-        if (elapsed >= timeout) {
-          clearInterval(intervalId);
-        }
-      }, pollInterval);
-
-      // Observe DOM changes so we re-apply if the chat replaces the launcher later
-      const observer = new MutationObserver(mutations => {
-        for (const m of mutations) {
-          if (m.addedNodes) {
-            for (const node of m.addedNodes) {
-              if (node.nodeType === 1) {
-                if (node.classList && node.classList.contains('n8n-chat-launcher')) {
-                  applyToLauncher(node);
-                } else {
-                  const nested = node.querySelector && node.querySelector('.n8n-chat-launcher');
-                  if (nested) applyToLauncher(nested);
-                }
-              }
-            }
-          }
-        }
-      });
-
-      observer.observe(document.body, { childList: true, subtree: true });
-
-    })();
-  </script>
 </body>
 </html>
